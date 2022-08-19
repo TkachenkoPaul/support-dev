@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="38c4ea93-6e02-411a-8838-590007cea942" name="pve0-worker">
+        <fileTransfer rootFolder="/home/tkachenko/dev/support-dev" accessType="SFTP" host="192.168.8.253" port="22" sshConfigId="ec952f04-f169-49b1-97ba-a13fdb1e4fe7" sshConfig="tkachenko@192.168.8.253:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
