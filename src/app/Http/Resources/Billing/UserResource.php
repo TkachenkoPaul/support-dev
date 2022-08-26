@@ -17,8 +17,14 @@ class UserResource extends JsonResource
         return [
             'login' => $this->resource->id,
             'uid' => $this->resource->uid,
-            'gid' => $this->resource->gid,
-            'test' => $this->resource->messages,
+            'activate' => $this->resource->activate,
+            'registration' => $this->resource->registration,
+            'credit' => [
+                'credit' => $this->resource->credit,
+                'credit_date' => $this->resource->credit_date,
+            ],
+            'group' => new GroupResource($this->resource->group),
+            'deposit' =>  new BillResource($this->resource->deposit),
             'contacts' => [
                 'fio' => $this->resource->contacts->fio,
                 'phone' => $this->resource->contacts->phone,

@@ -19,7 +19,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
         $credentials = $request->only('id', 'password');
-        $token = auth('api')->setTTL(120)->attempt($credentials);
+        $token = auth('api')->setTTL(60 * 24)->attempt($credentials);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
