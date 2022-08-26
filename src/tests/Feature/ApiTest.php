@@ -175,4 +175,58 @@ class ApiTest extends TestCase
                 ],
             ]);
     }
+
+    /*meesages endpoints*/
+    public function testUserMessagesEndpoint()
+    {
+        $admin = Admins::query()->find( Config::get('api.apiLogin'));
+        $token = auth()->login($admin);
+        $baseUrl = Config::get('app.url').'/api';
+        $response = $this->withHeader('Authorization','Bearer '.$token)
+            ->json('GET', $baseUrl . '/billing/messages/1', []);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data'=> [
+                    '*' => [
+                        'id','uid','chapter','message','reply','ip','date','state','subject','priority',
+                        'closed_date','done_date','plan_date','plan_time','admin_read','responsible','inner_msg','phone'
+                    ]
+                ],
+            ]);
+    }
+    public function testAllMessagesEndpoint()
+    {
+        $admin = Admins::query()->find( Config::get('api.apiLogin'));
+        $token = auth()->login($admin);
+        $baseUrl = Config::get('app.url').'/api';
+        $response = $this->withHeader('Authorization','Bearer '.$token)
+            ->json('GET', $baseUrl . '/billing/messages', []);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data'=> [
+                    '*' => [
+                        'id','uid','chapter','message','reply','ip','date','state','subject','priority',
+                        'closed_date','done_date','plan_date','plan_time','admin_read','responsible','inner_msg','phone',
+                    ]
+                ],
+            ]);
+    }
+    public function testMessageEndpoint()
+    {
+        $admin = Admins::query()->find( Config::get('api.apiLogin'));
+        $token = auth()->login($admin);
+        $baseUrl = Config::get('app.url').'/api';
+        $response = $this->withHeader('Authorization','Bearer '.$token)
+            ->json('GET', $baseUrl . '/billing/message/62567', []);
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data'=> [
+                    'id','uid','chapter','message','reply','ip','date','state','subject','priority',
+                    'closed_date','done_date','plan_date','plan_time','admin_read','responsible','inner_msg','phone','replies'
+                ],
+            ]);
+    }
 }

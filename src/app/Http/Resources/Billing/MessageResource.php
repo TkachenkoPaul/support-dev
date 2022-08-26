@@ -16,6 +16,10 @@ class MessageResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
+            'uid' => $this->resource->uid,
+            'reply' => $this->resource->reply,
+            'ip' => $this->resource->ip,
+            'priority' => $this->resource->rpiority,
             'chapter' => $this->resource->chapter,
             'state' => $this->resource->state,
             'message' => $this->resource->messasge,
@@ -30,6 +34,7 @@ class MessageResource extends JsonResource
             'plan_date' => $this->resource->plan_date,
             'plan_time' => $this->resource->paln_time,
             'admin_read' => $this->resource->admin_read,
+            'replies' => MessageReplyResource::collection($this->whenLoaded('replies'))
         ];
     }
 }

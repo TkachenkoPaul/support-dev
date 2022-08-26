@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FeesController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,7 @@ Route::prefix('billing')->middleware('auth:api')->group(function (){
     Route::get('payments/{billId}',[PaymentsController::class,'userPayments']);
     Route::get('fees',[FeesController::class,'index']);
     Route::get('fees/{billId}',[FeesController::class,'userFees']);
+    Route:: get('messages',[MessagesController::class,'index']);
+    Route:: get('messages/{uid}',[MessagesController::class,'userMessages']);
+    Route:: get('message/{id}',[MessagesController::class,'messageById']);
 });
