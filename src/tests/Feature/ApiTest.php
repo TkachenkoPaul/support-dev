@@ -45,7 +45,7 @@ class ApiTest extends TestCase
         $token = auth()->login($user);
         $baseUrl = Config::get('app.url').'/api';
         $response = $this->withHeader('Authorization','Bearer '.$token)
-            ->json('GET', $baseUrl . '/billing/users', []);
+            ->json('GET', $baseUrl . '/billing/users?page=1&perpage=30', []);
 
         $response
             ->assertStatus(200)
@@ -56,6 +56,9 @@ class ApiTest extends TestCase
                         'login',
                         'activate',
                         'registration',
+                        'tariff' => [
+                            'status','name'
+                        ],
                         'credit' => [
                             'credit','credit_date'
                         ],

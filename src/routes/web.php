@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('home', function () {
-    $uids = Storage::get('users.txt');
-    $uids = explode("\n\n",$uids);
+    $uids = Storage::get('sol-21-26-KTV-PAUSE.txt');
+    $uids = explode("\r\n\r\n",$uids);
     foreach ($uids as $uid){
         $uids2[] = trim($uid,'"');
     }
@@ -77,18 +77,18 @@ Route::get('home', function () {
 //            dump($payment->save());
 //        });
 //    }
-//    foreach ($uids2 as $uid) {
-//        $user = User::with('tariff')->where('id','=',$uid)->first();
-//        $user->tariff->fill(['disable' => 3])->push();
-//        if ($user->tariff->tp_id === 20){
-//            $file = fopen(Storage::path('ktv.txt'),'a+');
-//        } else {
-//            $file = fopen(Storage::path('internet.txt'),'a+');
-//        }
-//        fwrite($file,'login:'.$user->id.' tp_id:'.$user->tariff->tp_id."\r\n");
-//        fclose($file);
-//        dump($user);
-//    }
+    foreach ($uids2 as $uid) {
+        $user = User::with('tariff')->where('id','=',$uid)->first();
+        $user->tariff->fill(['disable' => 3])->push();
+        if ($user->tariff->tp_id === 20){
+            $file = fopen(Storage::path('sol-21-26-ktv-done.txt'),'a+');
+        } else {
+            $file = fopen(Storage::path('sol-21-26-inet.txt'),'a+');
+        }
+        fwrite($file,'login:'.$user->id.' tp_id:'.$user->tariff->tp_id."\r\n");
+        fclose($file);
+        dump($user);
+    }
     dump($uids);
 });
 

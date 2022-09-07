@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Billing\Users\GetUsersRequest;
 use App\Http\Resources\Billing\UserCollection;
 use App\Http\Resources\Billing\UserResource;
 use App\Models\Billing\User;
@@ -20,17 +21,9 @@ class UserController extends Controller
         return response()->json(['user' => new UserResource($user)]);
     }
 
-    public function getUsers(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getUsers(GetUsersRequest $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $users =  User::query()->select('uid','id','gid','bill_id')
-            ->with(
-                'group:gid,name',
-                'contacts:uid,fio,phone',
-                'tariff:uid,disable,tp_id',
-                'tariff.information:id,name',
-                'deposit:deposit,id'
-            )
-            ->paginate(30);
+        $users =  User::query()->paginate($request->perpage);
         return UserResource::collection($users);
     }
 
