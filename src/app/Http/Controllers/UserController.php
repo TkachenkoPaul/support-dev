@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     public function getUser($uid): JsonResponse
     {
+        /*TODO we need to do it*/
         $user = User::query()->find($uid);
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'User does not exist'],404);

@@ -19,6 +19,10 @@ class UserResource extends JsonResource
             'uid' => $this->resource->uid,
             'activate' => $this->resource->activate,
             'registration' => $this->resource->registration,
+//            'tariff'=>[
+//                'status' => $this->resource->tariff->disable,
+//                'name' => $this->resource->tariff->information->name,
+//            ],
             'tariff' => new DvMainResource($this->resource->tariff),
             'credit' => [
                 'credit' => $this->resource->credit,
